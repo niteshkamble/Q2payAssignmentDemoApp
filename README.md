@@ -1,80 +1,62 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Assignment Demo App
 
-# Getting Started
+This mobile app project is an assignment. The assignment details can be found [here](https://drive.google.com/file/d/19AmgtOwnNYi7-m69hOBIo9BdjHq23Jjj/view).
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+[Scroll for preview images.](#preview)
 
-## Step 1: Start the Metro Server
+## Features
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- Uses React Native Navigation for navigation between screens.
+- Utilizes useContext and useReducer for state management.
+- Implements API calls to fetch assignment data.
+- Utilizes FlatList to display assignment items.
+- Implements SkeletonView Moti to enhance the user experience while loading data.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Setup
 
-```bash
-# using npm
-npm start
+Follow these steps to set up and run the app on your local machine:
 
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
+### 1. Clone Repository
 
 ```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
+git clone https://github.com/niteshkamble/Q2payAssignmentDemoApp.git
 ```
-
-### For iOS
-
+### 2. Open Project Folder in Terminal
 ```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+cd Q2payAssignmentDemoApp
 ```
+### 3. Install Dependencies
+```bash
+npm install --legacy-peer-deps
+```
+For iOS:
+```bash
+cd ios && pod install && cd ..
+```
+### 4. Run the App
+To run the app on an Android emulator or device:
+```bash
+npx react-native run-android
+```
+o run the app on an iOS simulator or device:
+```bash
+npx react-native run-ios
+```
+### 5. Build Debug APK
+To build a debug APK for Android:
+```bash
+npm run debug_apk
+```
+### Preview
+<a name="preview"></a>
+<img width="346" alt="products_page" src="https://github.com/niteshkamble/Q2payAssignmentDemoApp/assets/54447050/d7b714a9-db4b-48a1-803a-d26f23026640">
+<img width="342" alt="details_page" src="https://github.com/niteshkamble/Q2payAssignmentDemoApp/assets/54447050/27caa732-9880-4eb8-bbb2-7a71723462aa">
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+<img width="338" alt="android_products_page" src="https://github.com/niteshkamble/Q2payAssignmentDemoApp/assets/54447050/f16020d1-8ce2-49b8-9653-dea2e4f91fe2">
+<img width="332" alt="android_detail_page" src="https://github.com/niteshkamble/Q2payAssignmentDemoApp/assets/54447050/ddf92fbe-dae3-4760-88bf-9b9f25cef5b3">
 
-## Step 3: Modifying your App
 
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-# Q2payAssignmentDemoApp
+My system setup:
+- Node: v20.10.0
+- Java: 17.0.9" 2023-10-17 LTS
