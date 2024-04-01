@@ -2,7 +2,7 @@ import React, {createContext, useContext, useReducer} from 'react';
 import {Product, productData} from './Interfaces';
 import {getProduct, getProductList} from '../services/product.service';
 
-// Define the action types for state updates
+// action types for state updates
 enum ActionType {
   FETCH_PRODUCTS_START,
   FETCH_PRODUCTS_SUCCESS,
@@ -14,7 +14,7 @@ enum ActionType {
   FETCH_PRODUCT_ERROR,
 }
 
-// Define the action type for state updates
+// action type for state updates
 type Action =
   | {type: ActionType.FETCH_PRODUCTS_START}
   | {type: ActionType.FETCH_PRODUCTS_SUCCESS; payload: Product[]}
@@ -24,17 +24,15 @@ type Action =
   | {type: ActionType.PRODUCT_VIEWED}
   | {type: ActionType.FETCH_PRODUCT_ERROR; payload: string};
 
-// Define the state type for the context
+// state type for the context
 interface State {
   products: Product[];
   product: Product | null;
   loading: boolean;
   error: string | null;
-  // listSize:number,
-  // listLimit:number
 }
 
-// Define reducer function to handle state updates
+// reducer function to handle state updates
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case ActionType.FETCH_PRODUCTS_START:
@@ -57,7 +55,7 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-// Create the context
+// the context
 const ProductsContext = createContext<
   State & {
     fetchProducts: () => Promise<void>;
@@ -105,14 +103,12 @@ const ProductsProvider: React.FC<{children: React.ReactNode}> = ({
     products: null as unknown as Product[],
     product: null,
     loading: false,
-    error: null,
-    // listSize:0,
-    // listLimit:20
+    error: null
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Define fetchProducts function
+  //fetchProductsList function
   const fetchProducts = async () => {
     dispatch({type: ActionType.FETCH_PRODUCTS_START});
     try {

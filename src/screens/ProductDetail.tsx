@@ -17,21 +17,20 @@ import ProductDetailItemChip from '../components/ProductDetailItemChip';
 import ErrorComponent from '../components/ErrorComponent';
 import {Skeleton} from 'moti/skeleton';
 import {skeletonCommonProps} from '../utils/Constants';
+import ProductDetialPlaceholder from '../components/ProductDetialPlaceholder';
 
 const lisItemtWidth = Dimensions.get('window').width;
 
 const ProductDetail = ({route}: any) => {
   const {productId} = route.params;
-  const {product, error, fetchProduct,resetProduct} = useProducts();
+  const {product, error, fetchProduct, resetProduct} = useProducts();
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slideRef = useRef(null);
 
   useEffect(() => {
     fetchProduct(productId);
-    return() =>{
-      resetProduct()
-    }
+    return resetProduct;
   }, []);
 
   type props = {
@@ -40,7 +39,7 @@ const ProductDetail = ({route}: any) => {
 
   const Item = ({url}: props) => {
     return (
-      <View style={{backgroundColor: 'white'}}>
+      <View style={{backgroundColor: 'white', padding: 4}}>
         <Image
           source={{uri: url}}
           resizeMode="contain"
@@ -59,91 +58,64 @@ const ProductDetail = ({route}: any) => {
   if (error)
     return <ErrorComponent err={'Failed to load the product detials.'} />;
 
-  return (
-    <View style={styles.container}>
-      <Skeleton.Group show={product == null}>
-        <Skeleton width={lisItemtWidth} height={250} {...skeletonCommonProps}>
-          <FlatList
-            ref={slideRef}
-            data={product?.images}
-            horizontal
-            renderItem={({item, index}) => <Item url={item} />}
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-            bounces={false}
-            scrollEventThrottle={32}
-            keyExtractor={(item, index) => index.toString()}
-            onViewableItemsChanged={viewableItemChanged}
-            viewabilityConfig={{viewAreaCoveragePercentThreshold: 70}}
-            onScroll={Animated.event(
-              [{nativeEvent: {contentOffset: {x: scrollX}}}],
-              {useNativeDriver: false},
-            )}
-          />
-        </Skeleton>
+  if (product == null) {
+    return <ProductDetialPlaceholder />;
+  } else {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          ref={slideRef}
+          data={product?.images}
+          horizontal
+          renderItem={({item, index}) => <Item url={item} />}
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          bounces={false}
+          scrollEventThrottle={32}
+          keyExtractor={(item, index) => index.toString()}
+          onViewableItemsChanged={viewableItemChanged}
+          viewabilityConfig={{viewAreaCoveragePercentThreshold: 70}}
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {x: scrollX}}}],
+            {useNativeDriver: false},
+          )}
+        />
+
         {/* Dot Paginator */}
         <Paginator images={product?.images} scrollx={scrollX} />
 
         {/* Details View */}
         <View style={styles.subContainer}>
-          <Skeleton width={'85%'} height={30} {...skeletonCommonProps}>
-            <Text style={styles.title}>{product?.title}</Text>
-          </Skeleton>
+          <Text style={styles.title}>{product?.title}</Text>
 
           {/* Star View */}
           <View style={{marginTop: 4}}>
-            <Skeleton width={'65%'} height={20} {...skeletonCommonProps}>
-              <View style={styles.starContainer}>
-                <AirbnbRating
-                  count={5}
-                  defaultRating={product?.rating}
-                  size={16}
-                  isDisabled
-                  showRating={false}
-                />
-                <Text style={{color:'#000000'}}>({product?.rating.toFixed(1)})</Text>
-              </View>
-            </Skeleton>
+            <View style={styles.starContainer}>
+              <AirbnbRating
+                count={5}
+                defaultRating={product?.rating}
+                size={16}
+                isDisabled
+                showRating={false}
+              />
+              <Text style={{color: '#000000'}}>
+                ({product?.rating.toFixed(1)})
+              </Text>
+            </View>
           </View>
 
           {/* Price & Disount */}
-          <Skeleton width={'50%'} height={30} {...skeletonCommonProps}>
-            <View style={styles.priceContainer}>
-              <Text style={styles.priceText}>
-                {'$'}
-                {product?.price}
-              </Text>
-              <Text style={styles.discounttext}>
-                {product?.discountPercentage}
-                {'%'} off
-              </Text>
-            </View>
-          </Skeleton>
+          <View style={styles.priceContainer}>
+            <Text style={styles.priceText}>
+              {'$'}
+              {product?.price}
+            </Text>
+            <Text style={styles.discounttext}>
+              {product?.discountPercentage}
+              {'%'} off
+            </Text>
+          </View>
 
-          {/* decription */}
-          {!product && (
-            <View>
-              <View style={{marginVertical: 2}}>
-                <Skeleton
-                  height={18}
-                  width={'100%'}
-                  {...skeletonCommonProps}></Skeleton>
-              </View>
-
-              <View style={{marginVertical: 2}}>
-                <Skeleton
-                  height={18}
-                  width={'100%'}
-                  {...skeletonCommonProps}></Skeleton>
-              </View>
-              <View style={{marginVertical: 2}}>
-                <Skeleton
-                  height={18}
-                  width={'100%'}
-                  {...skeletonCommonProps}></Skeleton>
-              </View>
-            </View>
-          )}
           {product && (
             <Text style={styles.description}>{product?.description}</Text>
           )}
@@ -205,9 +177,10 @@ const ProductDetail = ({route}: any) => {
             </>
           )}
         </View>
-      </Skeleton.Group>
-    </View>
-  );
+        
+      </View>
+    );
+  }
 };
 
 export default ProductDetail;
@@ -219,7 +192,7 @@ const styles = StyleSheet.create({
     paddingBottom: 18,
   },
   subContainer: {backgroundColor: 'white', width: '100%', padding: 8},
-  title: {fontSize: 22, fontWeight: '500', marginVertical: 6,color:'#000000'},
+  title: {fontSize: 22, fontWeight: '500', marginVertical: 6, color: '#000000'},
   description: {
     fontSize: 17,
     marginTop: 5,
@@ -236,7 +209,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     alignItems: 'center',
   },
-  priceText: {fontSize: 22, fontWeight: '500',color:'#000'},
+  priceText: {fontSize: 22, fontWeight: '500', color: '#000'},
   discounttext: {
     fontSize: 24,
     fontWeight: 'bold',

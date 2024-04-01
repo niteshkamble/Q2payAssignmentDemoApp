@@ -6,7 +6,7 @@ const getProductList = async () => {
   const response = await fetch(`${BASE_URL}/products`);
   const productData = (await response.json()) as productData;
   //delaying to show skeleton loader smoothly.
-  await new Promise(resolve => setTimeout(resolve, 1500));
+  await new Promise(resolve => setTimeout(resolve, 1200));
   return productData;
 };
 
