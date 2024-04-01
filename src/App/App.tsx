@@ -1,6 +1,6 @@
 import 'react-native-reanimated';
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Home from '../screens/Home';
 import {ProductsProvider} from './AppState';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -8,11 +8,16 @@ import {NavigationContainer} from '@react-navigation/native';
 import ProductDetail from '../screens/ProductDetail';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import SplashScreen from 'react-native-splash-screen'
 
 const Stack = createNativeStackNavigator();
 
-
 const App = () => {
+
+  useEffect(()=>{
+    SplashScreen.hide()
+  },[])
+
   return (
     <ProductsProvider>
     <GestureHandlerRootView style={{flex: 1}}>

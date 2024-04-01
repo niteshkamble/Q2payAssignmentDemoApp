@@ -46,18 +46,6 @@ const Home = ({navigation}: any) => {
           item ? item.id.toString() : index.toString()
         }
         showsVerticalScrollIndicator={false}
-
-        //Not utilizing below prop as we are using skeleton view to
-        //achieve the same
-
-        // contentContainerStyle={
-        //   loading
-        //     ? {justifyContent: 'center', height: '100%', alignItems: 'center'}
-        //     : null
-        // }
-        // ListEmptyComponent={
-        //   loading ? <LoadingIndicator /> : <Text>Empty List</Text>
-        // }
       />
     </View>
     </SafeAreaView>
