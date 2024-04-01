@@ -4,6 +4,8 @@ This mobile app project is an assignment. The assignment details can be found [h
 
 [Scroll for preview images.](#preview)
 
+[Download debug apk](https://drive.google.com/file/d/1-yHPht66BwotfEnxdk53tvxCp1DOjFGh/view?usp=sharing)
+
 ## Features
 
 - Uses React Native Navigation for navigation between screens.
